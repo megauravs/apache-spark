@@ -30,18 +30,21 @@ class Word_Count():
                 break
 
     def search_word_in_line(self, word):
-        count = 1
+        line_no = 1
         for line in self.text.collect():
             if word in strip_punc(line):
-                print('{}. {}'.format(count, line))
-            count += 1
+                print('{}. {}'.format(line_no, line))
+            line_no += 1
+
             
 def strip_punc(s):
     return s.translate(str.maketrans('', '', string.punctuation)).split(' ')
 
+
 def delete_out_dir(out_dir):
     subprocess.call(["hdfs", "dfs", "-rm", "-R", out_dir])
-    
+
+
 def main(argv):
     delete_out_dir(argv[1])
     word_count = Word_Count()
